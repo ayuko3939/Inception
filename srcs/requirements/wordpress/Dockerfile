@@ -1,18 +1,17 @@
 FROM debian:bullseye
 
-RUN apt-get update && \
-    apt-get install -y \
-      php7.4 \
-      php7.4-fpm \
-      php7.4-cli \
-      php7.4-mysql \
-      mariadb-client \
-      curl
+RUN apt-get update && apt-get install -y php7.4 \
+                                         php7.4-fpm \
+                                         php7.4-cli \
+                                         php7.4-mysql \
+                                         mariadb-client \
+                                         curl
 
 RUN mkdir -p /var/www/html
 
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x /usr/local/bin/wp
+RUN chown root:root /usr/local/bin/wp
 
 RUN chown -R www-data:www-data /var/www/html
 
